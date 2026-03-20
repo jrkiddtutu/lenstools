@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LENSTOOLS · Developer Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0a0c12 0%, #0f111a 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      color: #eef2ff;
+      min-height: 100vh;
+    }
+
+    /* glass navbar */
+    .navbar {
+      background: rgba(15, 20, 30, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(88, 130, 193, 0.25);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6e8efb, #a777ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: #cdd9ff;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      text-shadow: 0 0 5px #6e8efb;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.8rem;
+    }
+
+    /* cards & glass panels */
+    .glass-panel {
+      background: rgba(18, 24, 36, 0.65);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      border: 1px solid rgba(110, 142, 251, 0.2);
+      padding: 1.8rem;
+      transition: all 0.2s;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tool-header {
+      margin-bottom: 2rem;
+    }
+
+    button, .btn {
+      background: #2d3a5e;
+      border: none;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+
+    button.primary {
+      background: linear-gradient(100deg, #4f6df5, #7c5af5);
+      box-shadow: 0 4px 10px rgba(79, 109, 245, 0.3);
+    }
+
+    button.primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    input, textarea, select {
+      background: #10131f;
+      border: 1px solid #2c3b5c;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      color: white;
+      font-family: inherit;
+      width: 100%;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .event-list {
+      max-height: 500px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+
+    .event-item {
+      background: rgba(0, 0, 0, 0.3);
+      margin: 0.5rem 0;
+      padding: 0.8rem 1rem;
+      border-radius: 1.2rem;
+      cursor: pointer;
+      transition: 0.1s;
+      border-left: 3px solid #6e8efb;
+    }
+
+    .event-item.active {
+      background: #1e2a44;
+      border-left: 4px solid #a777ff;
+    }
+
+    .code-block {
+      background: #0b0e16;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin-top: 1rem;
+      border: 1px solid #2a385c;
+    }
+
+    .log-entry {
+      border-bottom: 1px solid #233056;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .community-post {
+      background: rgba(25, 32, 48, 0.7);
+      border-radius: 1.2rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .vote-area {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .badge {
+      background: #1f2a44;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+    }
+
+    .task-card {
+      background: #0f1422;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 0.8rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">⚡ LENSTOOLS</div>
+    <div class="nav-links">
+      <a href="/" data-link>🏠 Inicio</a>
+      <a href="/discord/events" data-link>🎧 Discord Events</a>
+      <a href="/discord/logs" data-link>📜 Server Logs</a>
+      <a href="/discord/community" data-link>📬 Dev Community</a>
+      <a href="/tools/automessage" data-link>🤖 AutoMessage</a>
+    </div>
+  </nav>
+  <div id="app" class="container"></div>
+  <footer>LENSTOOLS · herramientas para desarrolladores · código abierto</footer>
+
+  <script>
+    // ---------- ROUTER SPA ----------
+    const routes = {
+      '/': homePage,
+      '/discord/events': eventsPage,
+      '/discord/logs': logsPage,
+      '/discord/community': communityPage,
+      '/tools/automessage': autoMessagePage
+    };
+
+    function navigate(path, pushState = true) {
+      if (pushState) {
+        window.history.pushState({}, '', path);
+      }
+      renderPage(path);
+    }
+
+    function renderPage(path) {
+      const app = document.getElementById('app');
+      const routeFunc = routes[path];
+      if (routeFunc) {
+        app.innerHTML = '';
+        routeFunc(app);
+        // handle hash after events render
+        if (path === '/discord/events') {
+          handleEventsHash();
+          window.addEventListener('hashchange', handleEventsHash);
+        } else {
+          window.removeEventListener('hashchange', handleEventsHash);
+        }
+      } else {
+        app.innerHTML = `<div class="glass-panel"><h2>404 - Herramienta no encontrada</h2><p>Revisa la URL: ${path}</p></div>`;
+      }
+    }
+
+    function handleEventsHash() {
+      const hash = window.location.hash.slice(1);
+      if (hash && (hash === 'js' || hash === 'ts' || hash === 'python')) {
+        if (window.setEventsLanguage) window.setEventsLanguage(hash);
+      } else if (!hash && window.setEventsLanguage) {
+        window.setEventsLanguage('js');
+      }
+    }
+
+    // -------- HOME ----------
+    function homePage(container) {
+      container.innerHTML = `
+        <div class="glass-panel" style="text-align:center;">
+          <h1>🔧 LENSTOOLS · Dev Toolbox</h1>
+          <p style="margin-bottom:2rem;">Herramientas inteligentes para desarrolladores de Discord y código.</p>
+          <div class="grid-2">
+            <div class="glass-panel"><h3>🎧 Discord Events</h3><p>Lista de eventos de Discord con ejemplos en JS, TS, Python.</p><button class="primary" id="goEvents">Explorar eventos →</button></div>
+            <div class="glass-panel"><h3>📜 Server Logs</h3><p>Registros simulados de un servidor de Discord para auditoría.</p><button id="goLogs">Ver registros →</button></div>
+            <div class="glass-panel"><h3>📬 Dev Community</h3><p>Foro estilo Reddit: programación, Discord, código.</p><button id="goCommunity">Visitar comunidad →</button></div>
+            <div class="glass-panel"><h3>🤖 AutoMessage</h3><p>Programa mensajes automáticos con bots (simulación).</p><button id="goAuto">Configurar mensajes →</button></div>
+          </div>
+        </div>
+      `;
+      document.getElementById('goEvents')?.addEventListener('click', () => navigate('/discord/events'));
+      document.getElementById('goLogs')?.addEventListener('click', () => navigate('/discord/logs'));
+      document.getElementById('goCommunity')?.addEventListener('click', () => navigate('/discord/community'));
+      document.getElementById('goAuto')?.addEventListener('click', () => navigate('/tools/automessage'));
+    }
+
+    // ---------- DISCORD EVENTS ----------
+    const eventsCatalog = [
+      { name: 'messageCreate', desc: 'Cuando se envía un mensaje en canal visible para el bot.' },
+      { name: 'guildMemberAdd', desc: 'Nuevo miembro se une al servidor.' },
+      { name: 'interactionCreate', desc: 'Slash commands, botones o modales son usados.' },
+      { name: 'voiceStateUpdate', desc: 'Cambios en canal de voz.' },
+      { name: 'messageDelete', desc: 'Se elimina un mensaje.' },
+      { name: 'guildBanAdd', desc: 'Usuario baneado del servidor.' },
+      { name: 'ready', desc: 'Bot conectado y listo.' },
+      { name: 'messageReactionAdd', desc: 'Reacción añadida a un mensaje.' }
+    ];
+
+    function getCodeExample(event, lang) {
+      if (lang === 'js') {
+        return `client.on('${event}', async (${event === 'messageCreate' ? 'message' : event === 'guildMemberAdd' ? 'member' : '...args'}) => {\n  console.log('Evento ${event} disparado');\n  // tu lógica aquí\n});`;
+      } else if (lang === 'ts') {
+        return `client.on('${event}', (${event === 'messageCreate' ? 'message: Message' : event === 'guildMemberAdd' ? 'member: GuildMember' : 'payload: any'}) => {\n  console.log(\`${event} triggered\`);\n});`;
+      } else if (lang === 'python') {
+        return `@client.event\nasync def on_${event}(${event === 'messageCreate' ? 'message' : event === 'guildMemberAdd' ? 'member' : 'arg'}):\n    print(f'Evento: ${event}')\n    # tu código aquí`;
+      }
+      return '// ejemplo no disponible';
+    }
+
+    let currentLang = 'js';
+    let activeEvent = eventsCatalog[0].name;
+
+    function eventsPage(container) {
+      container.innerHTML = `
+        <div class="glass-panel">
+          <div class="tool-header">
+            <h1>🎧 Discord Gateway Events</h1>
+            <p>Lista de eventos de Discord para bots — ejemplos en distintos lenguajes</p>
+            <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+              <button class="${currentLang === 'js' ? 'primary' : ''}" data-lang="js">JavaScript (discord.js)</button>
+              <button class="${currentLang === 'ts' ? 'primary' : ''}" data-lang="ts">TypeScript (discord.js)</button>
+              <button class="${currentLang === 'python' ? 'primary' : ''}" data-lang="python">Python (discord.py)</button>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="glass-panel">
+              <h3>📋 Eventos disponibles</h3>
+              <div class="event-list" id="eventsList"></div>
+            </div>
+            <div class="glass-panel">
+              <h3>📝 Ejemplo de código · <span id="langLabel">${currentLang.toUpperCase()}</span></h3>
+              <div id="eventTitle" style="font-weight:bold; margin-top:8px;">Evento: ${activeEvent}</div>
+              <pre class="code-block" id="codePreview"></pre>
+            </div>
+          </div>
+        </div>
+      `;
+      const langBtns = container.querySelectorAll('[data-lang]');
+      langBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const lang = btn.getAttribute('data-lang');
+          currentLang = lang;
+          window.location.hash = lang;
+          updateEventsUI(container);
+        });
+      });
+
+      function updateEventsUI(ctx) {
+        const listDiv = ctx.querySelector('#eventsList');
+        listDiv.innerHTML = '';
+        eventsCatalog.forEach(ev => {
+          const el = document.createElement('div');
+          el.className = `event-item ${activeEvent === ev.name ? 'active' : ''}`;
+          el.innerHTML = `<strong>${ev.name}</strong><br><small>${ev.desc}</small>`;
+          el.addEventListener('click', () => {
+            activeEvent = ev.name;
+            updateEventsUI(ctx);
+          });
+          listDiv.appendChild(el);
+        });
+        const langSpan = ctx.querySelector('#langLabel');
+        if (langSpan) langSpan.innerText = currentLang.toUpperCase();
+        const titleSpan = ctx.querySelector('#eventTitle');
+        if (titleSpan) titleSpan.innerText = `Evento: ${activeEvent}`;
+        const codeBlock = ctx.querySelector('#codePreview');
+        if (codeBlock) codeBlock.innerText = getCodeExample(activeEvent, currentLang);
+      }
+      updateEventsUI(container);
+      window.setEventsLanguage = (lang) => {
+        currentLang = lang;
+        updateEventsUI(container);
+      };
+    }
+
+    // ---------- SERVER LOGS (mock logs) ----------
+    const mockLogs = [
+      { timestamp: '2025-04-01 14:23:11', action: 'BAN', user: 'DevRage', moderator: 'AdminKael', details: 'Usuario baneado por spam' },
+      { timestamp: '2025-04-01 12:07:42', action: 'MESSAGE_DELETE', user: 'LunaCoder', channel: '#general', details: 'Mensaje eliminado: "link sospechoso"' },
+      { timestamp: '2025-03-31 22:15:03', action: 'MEMBER_JOIN', user: 'newbie_dev', details: 'Bienvenido automático' },
+      { timestamp: '2025-03-31 18:44:29', action: 'ROLE_UPDATE', user: 'Carlos', moderator: 'BotMod', details: 'Rol "Colaborador" añadido' },
+      { timestamp: '2025-03-30 09:12:55', action: 'VOICE_MOVE', user: 'Sofia', channel: '🎙️ General → Programación', details: 'Movido de canal' },
+      { timestamp: '2025-03-29 20:30:12', action: 'KICK', user: 'spam_bot', moderator: 'AutoMod', details: 'Expulsado por exceso de menciones' }
+    ];
+
+    function logsPage(container) {
+      container.innerHTML = `
+        <div class="glass-panel">
+          <h1>📜 Registros del servidor (Logs simulados)</h1>
+          <p>Eventos recientes de moderación, miembros y acciones destacadas.</p>
+          <div style="margin: 1rem 0;"><button id="refreshLogsBtn" class="primary">⟳ Refrescar logs</button></div>
+          <div id="logsContainer" class="glass-panel" style="max-height: 500px; overflow-y: auto;"></div>
+        </div>
+      `;
+      function renderLogs() {
+        const logsDiv = container.querySelector('#logsContainer');
+        logsDiv.innerHTML = mockLogs.map(log => `
+          <div class="log-entry">
+            <span style="color:#a5b4fc;">[${log.timestamp}]</span> 
+            <strong style="color:#ffb86b;">${log.action}</strong> · 
+            <span>👤 ${log.user || '—'}</span> · 
+            <span>${log.details}</span>
+            ${log.moderator ? `<span class="badge">mod: ${log.moderator}</span>` : ''}
+          </div>
+        `).join('');
+      }
+      renderLogs();
+      container.querySelector('#refreshLogsBtn').addEventListener('click', () => {
+        const newLog = {
+          timestamp: new Date().toLocaleString(),
+          action: 'AUDIT_LOG',
+          user: 'Sistema',
+          details: `Registro generado manualmente - ${Math.random().toString(36).substring(4)}`,
+          moderator: 'LENSTOOLS'
+        };
+        mockLogs.unshift(newLog);
+        renderLogs();
+      });
+    }
+
+    // ---------- COMMUNITY (Reddit-like) ----------
+    let posts = [];
+    function loadCommunityData() {
+      const stored = localStorage.getItem('lenstools_community');
+      if (stored) {
+        posts = JSON.parse(stored);
+      } else {
+        posts = [
+          { id: Date.now()+1, title: '¿Cómo manejar eventos de Discord en Python?', content: 'Estoy usando discord.py, necesito ejemplos de on_ready y on_message.', author: 'CoderGirl', upvotes: 12, comments: [{ author: 'devHelper', text: 'Mira la documentación oficial, también puedes usar comandos de bot.' }], timestamp: Date.now() - 86400000, tags: 'python,discord' },
+          { id: Date.now()+2, title: 'Mi bot no responde a slash commands (discord.js v14)', content: 'Ya registré los comandos globalmente pero no aparecen', author: 'jsMaster', upvotes: 5, comments: [], timestamp: Date.now() - 172800000, tags: 'javascript,discord.js' }
+        ];
+        saveCommunity();
+      }
+    }
+    function saveCommunity() { localStorage.setItem('lenstools_community', JSON.stringify(posts)); }
+
+    function communityPage(container) {
+      loadCommunityData();
+      function renderFeed() {
+        container.innerHTML = `
+          <div class="glass-panel">
+            <div style="display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap;">
+              <h1>📬 Dev Community · Discord & Programación</h1>
+              <button id="newPostBtn" class="primary">+ Nuevo post</button>
+            </div>
+            <div id="postsFeed" style="margin-top:2rem;"></div>
+          </div>
+        `;
+        const feedDiv = container.querySelector('#postsFeed');
+        feedDiv.innerHTML = '';
+        if (posts.length === 0) feedDiv.innerHTML = '<p>No hay publicaciones, crea la primera.</p>';
+        posts.sort((a,b) => b.upvotes - a.upvotes);
+        posts.forEach(post => {
+          const postEl = document.createElement('div');
+          postEl.className = 'community-post';
+          postEl.innerHTML = `
+            <div style="display:flex; justify-content:space-between;">
+              <h3>${escapeHtml(post.title)}</h3>
+              <div class="vote-area">
+                <button data-id="${post.id}" data-delta="1" class="vote-up">▲ ${post.upvotes}</button>
+                <button data-id="${post.id}" data-delta="-1" class="vote-down">▼</button>
+              </div>
+            </div>
+            <p>${escapeHtml(post.content)}</p>
+            <small>👤 ${escapeHtml(post.author)} · 🏷️ ${escapeHtml(post.tags)} · ${new Date(post.timestamp).toLocaleString()}</small>
+            <div style="margin-top:12px;">
+              <button class="toggle-comments" data-id="${post.id}">💬 Comentarios (${post.comments?.length || 0})</button>
+              <div id="comments-${post.id}" style="display:none; margin-top:12px;"></div>
+              <div><textarea id="newComment-${post.id}" placeholder="Escribe un comentario..." rows="2" style="width:100%;"></textarea>
+              <button class="add-comment" data-id="${post.id}">Responder</button></div>
+            </div>
+          `;
+          feedDiv.appendChild(postEl);
+        });
+        document.querySelectorAll('.vote-up').forEach(btn => btn.addEventListener('click', (e) => {
+          const id = parseInt(btn.getAttribute('data-id'));
+          const delta = parseInt(btn.getAttribute('data-delta'));
+          const post = posts.find(p => p.id === id);
+          if (post) { post.upvotes += delta; saveCommunity(); renderFeed(); }
+        }));
+        document.querySelectorAll('.vote-down').forEach(btn => btn.addEventListener('click', (e) => {
+          const id = parseInt(btn.getAttribute('data-id'));
+          const post = posts.find(p => p.id === id);
+          if (post && post.upvotes > -999) { post.upvotes -= 1; saveCommunity(); renderFeed(); }
+        }));
+        document.querySelectorAll('.toggle-comments').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.getAttribute('data-id');
+            const commentDiv = document.getElementById(`comments-${id}`);
+            if (commentDiv.style.display === 'none') {
+              const post = posts.find(p => p.id == id);
+              commentDiv.innerHTML = (post.comments || []).map(c => `<div style="border-left:2px solid #5f7ef2; margin:6px 0; padding-left:10px;"><strong>${escapeHtml(c.author)}</strong>: ${escapeHtml(c.text)}</div>`).join('');
+              commentDiv.style.display = 'block';
+            } else {
+              commentDiv.style.display = 'none';
+            }
+          });
+        });
+        document.querySelectorAll('.add-comment').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const textarea = document.getElementById(`newComment-${id}`);
+            const text = textarea.value.trim();
+            if (text) {
+              const post = posts.find(p => p.id === id);
+              post.comments = post.comments || [];
+              post.comments.push({ author: 'UsuarioLens', text: text, timestamp: Date.now() });
+              saveCommunity();
+              renderFeed();
+            } else alert('Escribe un comentario');
+          });
+        });
+        const newPostBtn = container.querySelector('#newPostBtn');
+        if (newPostBtn) newPostBtn.onclick = () => {
+          const title = prompt('Título del post:');
+          if (!title) return;
+          const content = prompt('Contenido:');
+          const tags = prompt('Tags (separados por coma):');
+          const newPost = {
+            id: Date.now(),
+            title: title.slice(0, 80),
+            content: content || '',
+            author: 'DevUser',
+            upvotes: 0,
+            comments: [],
+            timestamp: Date.now(),
+            tags: tags || 'discord,coding'
+          };
+          posts.unshift(newPost);
+          saveCommunity();
+          renderFeed();
+        };
+      }
+      renderFeed();
+    }
+
+    function escapeHtml(str) { return str?.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}) || ''; }
+
+    // ---------- AUTOMATED MESSAGES (simulación) ----------
+    let activeIntervals = {}; // id -> intervalId
+    let tasks = [];
+
+    function autoMessagePage(container) {
+      function refreshTasksUI() {
+        const tasksDiv = container.querySelector('#tasksList');
+        if (!tasksDiv) return;
+        tasksDiv.innerHTML = '';
+        tasks.forEach(task => {
+          const card = document.createElement('div');
+          card.className = 'task-card';
+          card.innerHTML = `
+            <div><strong>🤖 Bot: ${escapeHtml(task.botName)}</strong> | ⏱️ Cada ${task.intervalMinutes} min</div>
+            <div>💬 Mensaje: "${escapeHtml(task.message)}"</div>
+            <div>📡 Canales: ${task.channels.join(', ')}</div>
+            <div>Estado: ${task.active ? '✅ Activo' : '⏸️ Detenido'}</div>
+            <div style="margin-top:8px;">
+              <button data-id="${task.id}" class="toggleTaskBtn">${task.active ? '⏹️ Detener' : '▶️ Iniciar'}</button>
+              <button data-id="${task.id}" class="deleteTaskBtn">🗑️ Eliminar</button>
+            </div>
+          `;
+          tasksDiv.appendChild(card);
+        });
+        document.querySelectorAll('.toggleTaskBtn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+              if (task.active) {
+                if (activeIntervals[task.id]) clearInterval(activeIntervals[task.id]);
+                delete activeIntervals[task.id];
+                task.active = false;
+              } else {
+                startTaskInterval(task);
+                task.active = true;
+              }
+              refreshTasksUI();
+            }
+          });
+        });
+        document.querySelectorAll('.deleteTaskBtn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const idx = tasks.findIndex(t => t.id === id);
+            if (idx !== -1) {
+              if (activeIntervals[tasks[idx].id]) clearInterval(activeIntervals[tasks[idx].id]);
+              delete activeIntervals[tasks[idx].id];
+              tasks.splice(idx, 1);
+              refreshTasksUI();
+            }
+          });
+        });
+      }
+
+      function startTaskInterval(task) {
+        if (activeIntervals[task.id]) clearInterval(activeIntervals[task.id]);
+        const intervalMs = task.intervalMinutes * 60 * 1000;
+        const sendMock = () => {
+          task.channels.forEach(ch => {
+            addLogToPanel(`🤖 [${task.botName}] envió: "${task.message}" → #${ch}`);
+          });
+        };
+        sendMock(); // ejecutar inmediatamente al iniciar
+        const idVal = setInterval(sendMock, intervalMs);
+        activeIntervals[task.id] = idVal;
+      }
+
+      function addLogToPanel(text) {
+        const logPanel = document.getElementById('autoLogPanel');
+        if (logPanel) {
+          const p = document.createElement('div');
+          p.innerHTML = `[${new Date().toLocaleTimeString()}] ${text}`;
+          logPanel.prepend(p);
+          if (logPanel.children.length > 20) logPanel.removeChild(logPanel.lastChild);
+        }
+      }
+
+      container.innerHTML = `
+        <div class="glass-panel">
+          <h1>🤖 AutoMessage · Mensajes automatizados (Simulación)</h1>
+          <p>Configura un bot simulado que envía mensajes a canales cada cierto tiempo. (Demo sin token real)</p>
+          <div style="background:#0c0f1a; border-radius:1.5rem; padding:1.2rem; margin:1rem 0;">
+            <div class="grid-2">
+              <div><label>Nombre del Bot:</label><input type="text" id="botName" placeholder="Ej: HelperBot"></div>
+              <div><label>Mensaje:</label><input type="text" id="messageText" placeholder="Hola, recordatorio..."></div>
+              <div><label>Intervalo (minutos):</label><input type="number" id="intervalMin" value="1" step="0.5"></div>
+              <div><label>Canales (separados por coma):</label><input type="text" id="channelsInput" placeholder="general,anuncios,bot-commands"></div>
+            </div>
+            <button id="addTaskBtn" class="primary" style="margin-top:1rem;">➕ Agendar mensaje automático</button>
+          </div>
+          <div><h3>📋 Tareas activas</h3><div id="tasksList"></div></div>
+          <div><h3>📡 Log de envíos (simulado)</h3><div id="autoLogPanel" class="glass-panel" style="height:200px; overflow-y:auto; font-family: monospace; font-size:0.8rem;"></div></div>
+        </div>
+      `;
+      const logPanel = container.querySelector('#autoLogPanel');
+      if (logPanel) logPanel.innerHTML = '<i>Los mensajes simulados aparecerán aquí...</i>';
+      function addTask() {
+        const botName = container.querySelector('#botName').value.trim();
+        const message = container.querySelector('#messageText').value.trim();
+        let intervalMinutes = parseFloat(container.querySelector('#intervalMin').value);
+        const channelsRaw = container.querySelector('#channelsInput').value.trim();
+        if (!botName || !message || isNaN(intervalMinutes) || intervalMinutes <= 0 || !channelsRaw) {
+          alert('Completa todos los campos correctamente');
+          return;
+        }
+        const channels = channelsRaw.split(',').map(s => s.trim()).filter(c => c);
+        if (channels.length === 0) return;
+        const newTask = {
+          id: Date.now(),
+          botName,
+          message,
+          intervalMinutes,
+          channels,
+          active: true
+        };
+        tasks.push(newTask);
+        startTaskInterval(newTask);
+        refreshTasksUI();
+        container.querySelector('#botName').value = '';
+        container.querySelector('#messageText').value = '';
+        container.querySelector('#channelsInput').value = '';
+        container.querySelector('#intervalMin').value = '1';
+      }
+      container.querySelector('#addTaskBtn').addEventListener('click', addTask);
+      refreshTasksUI();
+    }
+
+    // ----- GLOBAL ROUTER INIT -----
+    function handleLinkClick(e) {
+      const target = e.target.closest('a[data-link]');
+      if (target && target.getAttribute('href')) {
+        e.preventDefault();
+        const href = target.getAttribute('href');
+        navigate(href);
+      }
+    }
+    document.body.addEventListener('click', handleLinkClick);
+    window.addEventListener('popstate', () => {
+      renderPage(window.location.pathname);
+    });
+    renderPage(window.location.pathname);
+  </script>
+</body>
+</html>
