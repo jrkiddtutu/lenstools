@@ -7,6 +7,11 @@ document.body.addEventListener('click', (e) => {
   if (link && link.getAttribute('href')) {
     e.preventDefault();
     navigate(link.getAttribute('href'));
+    // Cerrar el menú móvil después de hacer clic en un enlace
+    const navbar = document.querySelector('.navbar');
+    if (navbar && navbar.classList.contains('menu-open')) {
+      navbar.classList.remove('menu-open');
+    }
   }
 });
 
@@ -24,4 +29,13 @@ if (authContainer) {
   const updateAuth = () => renderAuthStatus(authContainer);
   updateAuth();
   onAuthChange(updateAuth);
+}
+
+// Control del menú hamburguesa
+const menuToggle = document.querySelector('.menu-toggle');
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('menu-open');
+  });
 }
