@@ -9,15 +9,18 @@
 <body>
   <nav class="navbar">
     <div class="logo">⚡ LENSTOOLS</div>
-    <div class="nav-links">
-      <a href="/" data-link>🏠 Inicio</a>
-      <a href="/api/events" data-link>🎧 Discord Events</a>
-      <a href="/discord/community" data-link>📬 Dev Community</a>
-      <a href="/tools/automessage" data-link>🤖 AutoMessage</a>
-      <a href="/api/lanyard" data-link>📡 Lanyard</a>
-    </div>
-    <div id="auth-status" class="auth-status">
-      <!-- El estado de login se inyecta aquí dinámicamente -->
+    <button class="menu-toggle" aria-label="Menú">☰</button>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="/" data-link>🏠 Inicio</a>
+        <a href="/api/events" data-link>🎧 Discord Events</a>
+        <a href="/discord/community" data-link>📬 Dev Community</a>
+        <a href="/tools/automessage" data-link>🤖 AutoMessage</a>
+        <a href="/api/lanyard" data-link>📡 Lanyard</a>
+      </div>
+      <div id="auth-status" class="auth-status">
+        <!-- El estado de login se inyecta aquí dinámicamente -->
+      </div>
     </div>
   </nav>
   <div id="app" class="container"></div>
