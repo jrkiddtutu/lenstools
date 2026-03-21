@@ -2,8 +2,6 @@ import homePage from './pages/home.js';
 import eventsPage from './pages/events.js';
 import communityPage from './pages/community.js';
 import autoMessagePage from './pages/automessage.js';
-import insightsPage from './pages/insights.js';
-import membersPage from './pages/members.js';
 import lanyardPage from './pages/lanyard.js';
 
 const routes = {
@@ -11,8 +9,6 @@ const routes = {
   '/api/events': eventsPage,
   '/discord/community': communityPage,
   '/tools/automessage': autoMessagePage,
-  '/discord/insights': insightsPage,
-  '/discord/members': membersPage,
   '/api/lanyard': lanyardPage
 };
 
