@@ -4,9 +4,9 @@ export default function lanyardPage(container) {
   container.innerHTML = `
     <div class="glass-panel">
       <h1>🟢 Perfil Lanyard</h1>
-      <p>Introduce un <strong>ID numérico</strong> de usuario de Discord para ver su presencia en tiempo real (vía <a href="https://lanyard.rest" target="_blank" style="color:#6e8efb;">api.lanyard.rest</a>).</p>
+      <p>Introduce un <strong>ID</strong> de usuario de Discord para ver su presencia en tiempo real <a href="https://discord.gg/lanyard" target="_blank" style="color:#6e8efb;">Unirse a Discord</a>.</p>
       <div class="info-note" style="background:#1e2a44; border-radius:1rem; padding:0.8rem; margin:1rem 0; font-size:0.85rem;">
-        ℹ️ <strong>Nota:</strong> Lanyard solo muestra presencia de usuarios que estén conectados al servicio (por ejemplo, que tengan el bot Lanyard en algún servidor o hayan usado la aplicación). No todos los usuarios de Discord son visibles.
+        ℹ️ <strong>Nota:</strong> Lanyard muestra solo a los usuarios que se encuentran en su servidor de discord, si no lo estan no estan siendo monitoreados. Si quieres ver informacion de un usuario comprueba que este en el servidor
       </div>
       <div style="display: flex; gap: 1rem; margin: 1.5rem 0;">
         <input type="text" id="userId" placeholder="ID de usuario (ej: 123456789012345678)" style="flex: 1;">
