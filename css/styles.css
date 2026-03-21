@@ -1,0 +1,241 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, #0a0c12 0%, #0f111a 100%);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+  color: #eef2ff;
+  min-height: 100vh;
+}
+
+/* glass navbar */
+.navbar {
+  background: rgba(15, 20, 30, 0.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(88, 130, 193, 0.25);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6e8efb, #a777ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  font-weight: 500;
+}
+
+.nav-links a {
+  color: #cdd9ff;
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: white;
+  text-shadow: 0 0 5px #6e8efb;
+}
+
+.auth-status {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.3rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.auth-status button {
+  background: #2d3a5e;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 0 1.8rem;
+}
+
+/* cards & glass panels */
+.glass-panel {
+  background: rgba(18, 24, 36, 0.65);
+  backdrop-filter: blur(4px);
+  border-radius: 2rem;
+  border: 1px solid rgba(110, 142, 251, 0.2);
+  padding: 1.8rem;
+  transition: all 0.2s;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.tool-header {
+  margin-bottom: 2rem;
+}
+
+button, .btn {
+  background: #2d3a5e;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.85rem;
+}
+
+button.primary {
+  background: linear-gradient(100deg, #4f6df5, #7c5af5);
+  box-shadow: 0 4px 10px rgba(79, 109, 245, 0.3);
+}
+
+button.primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+input, textarea, select {
+  background: #10131f;
+  border: 1px solid #2c3b5c;
+  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  color: white;
+  font-family: inherit;
+  width: 100%;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.event-list {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.event-item {
+  background: rgba(0, 0, 0, 0.3);
+  margin: 0.5rem 0;
+  padding: 0.8rem 1rem;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: 0.1s;
+  border-left: 3px solid #6e8efb;
+}
+
+.event-item.active {
+  background: #1e2a44;
+  border-left: 4px solid #a777ff;
+}
+
+.code-block {
+  background: #0b0e16;
+  border-radius: 1.2rem;
+  padding: 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin-top: 1rem;
+  border: 1px solid #2a385c;
+}
+
+.log-entry {
+  border-bottom: 1px solid #233056;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.community-post {
+  background: rgba(25, 32, 48, 0.7);
+  border-radius: 1.2rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.vote-area {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.badge {
+  background: #1f2a44;
+  border-radius: 30px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.7rem;
+}
+
+.task-card {
+  background: #0f1422;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 0.8rem 0;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Formulario comunidad */
+.new-post-form {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.new-post-form input,
+.new-post-form textarea {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+}
