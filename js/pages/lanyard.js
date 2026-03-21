@@ -28,7 +28,7 @@ export default function lanyardPage(container) {
       const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error('Usuario no encontrado en Lanyard. Asegúrate de que el ID sea correcto y que el usuario esté activo en Lanyard.');
+          throw new Error('Usuario no encontrado en Lanyard. Asegúrate de que el usuario este en el Discord Oficial de Lanyard.');
         }
         throw new Error(`Error HTTP ${response.status}`);
       }
@@ -38,10 +38,6 @@ export default function lanyardPage(container) {
     } catch (error) {
       profileDiv.innerHTML = `
         <p style="color: #ff8888;">❌ ${escapeHtml(error.message)}</p>
-        <p style="margin-top: 0.5rem;">💡 <strong>Sugerencias:</strong><br>
-        - Verifica que el ID sea numérico (puedes obtenerlo activando el modo desarrollador en Discord y copiando el ID del usuario).<br>
-        - El usuario debe tener actividad pública y estar conectado al servicio Lanyard (por ejemplo, en un servidor con el bot Lanyard).<br>
-        - Prueba con tu propio ID si no estás seguro.</p>
       `;
     }
   }
